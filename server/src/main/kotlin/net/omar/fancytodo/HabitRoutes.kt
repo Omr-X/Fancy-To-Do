@@ -34,7 +34,7 @@ fun Route.habitRoutes() {
             val id = call.parameters["id"] ?: return@put call.respondText("Missing id", status = HttpStatusCode.BadRequest)
             val existing = habitsStorage[id] ?: return@put call.respondText("Not Found", status = HttpStatusCode.NotFound)
             val updates = call.receive<Habit>()
-            habitsStorage[id] = existing.copy(title = updates.title)
+            habitsStorage[id] = existing.copy(title = updates.title, completions = updates.completions)
             call.respondText("Habit updated", status = HttpStatusCode.OK)
         }
 

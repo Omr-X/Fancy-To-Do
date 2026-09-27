@@ -3,6 +3,7 @@ package net.omar.fancytodo
 import com.example.configureRouting
 import com.example.configureSerialization
 import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
@@ -17,6 +18,7 @@ fun Application.module() {
         allowMethod(HttpMethod.Put)
         allowMethod(HttpMethod.Delete)
         allowMethod(HttpMethod.Patch)
+        allowHeader(HttpHeaders.ContentType)
         anyHost()
     }
     configureSerialization()

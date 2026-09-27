@@ -20,6 +20,12 @@ fun Route.taskRouting() {
         }
     }
 
+    route("/tasks") {
+        get {
+            call.respond(taskStorage.values.toList())
+        }
+    }
+
     route("/tasks/{id}") {
         get {
             val id = call.parameters["id"] ?: return@get call.respondText("Missing id", status = HttpStatusCode.BadRequest)

@@ -8,7 +8,7 @@ import java.time.LocalDate
 
 fun Route.homeRouting() {
     route("/home") {
-        get("/home") {
+        get {
             val today = LocalDate.now().toString()
             val habitsToday = habitsStorage.values.toList()
             val tasksDueToday = taskStorage.values.filter { it.dueDate == today }
