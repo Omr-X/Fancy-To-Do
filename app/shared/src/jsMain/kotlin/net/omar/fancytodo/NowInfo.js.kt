@@ -8,5 +8,5 @@ actual fun currentNow(): NowInfo {
     val date = Date()
     val offsetHours = -date.getTimezoneOffset() / 60
     val offsetLabel = "GMT" + (if (offsetHours >= 0) "+" else "") + offsetHours
-    return NowInfo(dayAbbrevs[date.getDay()], date.getDate(), date.getHours(), date.getMinutes(), offsetLabel)
+    return NowInfo(date.getFullYear(), date.getMonth() + 1, date.getDate(), dayAbbrevs[date.getDay()], date.getHours(), date.getMinutes(), offsetLabel)
 }

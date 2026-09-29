@@ -37,7 +37,7 @@ fun Route.taskRouting() {
             val id = call.parameters["id"] ?: return@put call.respondText("Missing id", status = HttpStatusCode.BadRequest)
             val existing = taskStorage[id] ?: return@put call.respondText("Not Found", status = HttpStatusCode.NotFound)
             val updates = call.receive<Task>()
-            taskStorage[id] = existing.copy(title = updates.title, description = updates.description, dueDate = updates.dueDate, guessedTime = updates.guessedTime, isCompleted = updates.isCompleted)
+            taskStorage[id] = existing.copy(title = updates.title, description = updates.description, chapterId = updates.chapterId, dueDate = updates.dueDate, guessedTime = updates.guessedTime, actualTime = updates.actualTime, isCompleted = updates.isCompleted)
             call.respondText("Task updated", status = HttpStatusCode.OK)
         }
 

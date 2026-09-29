@@ -7,6 +7,5 @@ import androidx.compose.ui.window.ComposeViewport
 fun main() {
     ComposeViewport {
         App()
-        println("I should be rendering the page")
     }
 }

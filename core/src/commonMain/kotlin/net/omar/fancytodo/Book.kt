@@ -5,6 +5,7 @@ import kotlin.uuid.Uuid
 
 @Serializable
 data class Book(
-    val id: String = Uuid .random().toString(),
-    val title: String
+    val id: String = Uuid.random().toString(),
+    val title: String,
+    val color: Int = 0
 )

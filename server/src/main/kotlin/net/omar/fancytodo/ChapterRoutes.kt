@@ -6,6 +6,12 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Route.chapterRouting() {
+    route("/chapters") {
+        get {
+            call.respond(chaptersStorage.values.toList())
+        }
+    }
+
     route("/books/{bookId}/chapters") {
         get {
             val bookId = call.parameters["bookId"] ?: return@get call.respondText("Missing bookId", status = HttpStatusCode.BadRequest)
@@ -38,6 +44,7 @@ fun Route.chapterRouting() {
         delete {
             val id = call.parameters["id"] ?: return@delete call.respondText("Missing id", status = HttpStatusCode.BadRequest)
             if (chaptersStorage.remove(id) != null) {
+                taskStorage.values.removeAll { it.chapterId == id }
                 call.respondText("Chapter removed", status = HttpStatusCode.Accepted)
             } else {
                 call.respondText("Not Found", status = HttpStatusCode.NotFound)

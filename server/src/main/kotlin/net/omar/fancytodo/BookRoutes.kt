@@ -29,17 +29,17 @@ fun Route.bookRouting() {
             val id = call.parameters["id"] ?: return@put call.respondText("Missing id", status = HttpStatusCode.BadRequest)
             val existing = booksStorage[id] ?: return@put call.respondText("Not Found", status = HttpStatusCode.NotFound)
             val updates = call.receive<Book>()
-            booksStorage[id] = existing.copy(title = updates.title)
+            booksStorage[id] = existing.copy(title = updates.title, color = updates.color)
             call.respondText("Book updated", status = HttpStatusCode.OK)
         }
 
         delete {
             val id = call.parameters["id"] ?: return@delete call.respondText("Missing id", status = HttpStatusCode.BadRequest)
-            if (booksStorage.remove(id) != null) {
-                call.respondText("Book removed", status = HttpStatusCode.Accepted)
-            } else {
-                call.respondText("Not Found", status = HttpStatusCode.NotFound)
-            }
+            if (booksStorage.remove(id) == null) return@delete call.respondText("Not Found", status = HttpStatusCode.NotFound)
+            val chapterIds = chaptersStorage.values.filter { it.bookId == id }.map { it.id }
+            chapterIds.forEach { chaptersStorage.remove(it) }
+            taskStorage.values.removeAll { it.chapterId in chapterIds }
+            call.respondText("Book removed", status = HttpStatusCode.Accepted)
         }
     }
 }

@@ -13,6 +13,8 @@ import io.ktor.server.plugins.cors.routing.CORS
 fun main(args: Array<String>) = io.ktor.server.netty.EngineMain.main(args)
 
 fun Application.module() {
+    loadStorage()
+    startAutosave()
 
     install(CORS) {
         allowMethod(HttpMethod.Put)
