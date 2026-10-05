@@ -1,0 +1,21 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "server",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "set \"JAVA_HOME=C:\\Program Files\\Eclipse Adoptium\\jdk-25.0.4.101-hotspot\" && gradlew.bat :server:run --console=plain"],
+      "port": 8080
+    },
+    {
+      "name": "web",
+      "runtimeExecutable": "C:\\Users\\omar\\.gradle\\nodejs\\node-v25.0.0-win-x64\\node.exe",
+      "runtimeArgs": [
+        "C:\\Users\\omar\\AppData\\Local\\Temp\\claude\\C--Users-omar-Downloads-Fancy-To-Do-master-Fancy-To-Do-master\\333c4952-245c-4a67-bcdf-7fa9ea6c59d9\\scratchpad\\serve.js",
+        "app\\webApp\\build\\dist\\wasmJs\\developmentExecutable",
+        "8090"
+      ],
+      "port": 8090
+    }
+  ]
+}
